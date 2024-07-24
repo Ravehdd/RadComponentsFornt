@@ -1,0 +1,67 @@
+section {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    height: 100vh;
+    /* Задаем высоту вьюпорта */
+    margin: 0;
+    margin-top: 2rem;
+    /* Убираем стандартные отступы */
+}
+
+tr {
+    /* margin-top: 5rem */
+        /* border-radius: 1px;
+        border: 3px solid #292929; */
+    border-radius: 3px;
+    
+}
+
+th {
+    padding-inline: 6rem;
+    padding-block: 1rem;
+    background-color: #292929;
+    color: #f5f5f5;
+}
+
+td {
+    text-align: center;
+    padding-block: 0.5rem;
+}
+
+/* .dark {
+    background-color: rgb(136, 136, 136);
+    border-style: solid;
+    border-color: black;
+    border: 1px;
+}
+
+tr:nth-child(even) {
+    background-color: #cfcfcf;
+}
+
+tr:hover {
+    background-color: #ddd;
+} */
+
+.mainTableContainer {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    text-align: center;
+    width: 60%;
+    height: auto;
+    margin: 0;
+    margin-top: 1rem;
+    border-radius: 5px;
+    border: 1px solid #f5f5f5;
+    border-color: #292929;
+}
+
+.red {
+    background-color: rgb(255, 187, 187);
+}
+
+.yellow {
+    background-color: rgb(255, 255, 187);
+}
