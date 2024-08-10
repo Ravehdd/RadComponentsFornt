@@ -11,7 +11,7 @@ export default function Button({ ...props }: ButtonProps) {
     <button
       className={
         props.isActive ? `${classes.button} ${classes.active}` : `${classes.button}`
-      }
+       }
       onClick={props.onClick}
     >
       {props.children}

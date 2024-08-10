@@ -33,6 +33,7 @@
     flex: 1;
     justify-content: space-between;
     /* Задает равный размер для всех дочерних элементов */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
 }
 
 .openContent {
@@ -51,6 +52,7 @@
     /* Острые углы снизу */
     /* Скругление верхнего левого угла */
     border-top-left-radius: 5px;
+    
 }
 
 .fullInfo {
@@ -68,5 +70,6 @@
     /* Скругление верхнего левого угла */
     border-top-left-radius: 0;
     /* Скругление верхнего правого угла */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
 
 }

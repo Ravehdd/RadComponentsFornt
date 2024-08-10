@@ -44,6 +44,9 @@ export default function Orders() {
     return (
         <>
         <h1 className="text-3xl mt-[2rem] ml-[2rem] mb-[2rem]">Заказы</h1>
+        {loading ? (
+            <p>Loading...</p>
+        ) : (
         <div className={classes.outerContainer}>
             <div className={classes.innerContainer}>
             {orders && 
@@ -66,9 +69,9 @@ export default function Orders() {
                         {isOpenId === order.order_id &&
                                 <div className={classes.fullInfo}>
                                     <div>
-                                    <h1 className="font-bold">Компоненты</h1>
+                                    <h1 className=" text-lg">Компоненты</h1>
                                     {order.comp_data.map((comp) => (
-                                        <p>{comp.comp_name}: {comp.amount_need} штук</p>
+                                        <p className="flex"><p className="font-bold">{comp.comp_name}</p>: {comp.amount_need} штук</p>
                                     ))}
                                     </div>
                                   
@@ -78,7 +81,7 @@ export default function Orders() {
                 ))
             }
             </div>
-        </div>
+        </div>)}
         </>
     )
 }   

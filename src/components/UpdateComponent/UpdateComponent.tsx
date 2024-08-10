@@ -9,7 +9,7 @@ export default function UpdateComponent() {
     const component = useAppSelector(updateComponentSlice.selectors.selectComponent)
 
 
-    const submitHandler = (event: React.FormEvent) => {
+    const submitHandler = () => {
         // event.preventDefault()
         const comp_data = {comp_name: component, amount_add: Number(input.current?.value)}
         console.log(comp_data)

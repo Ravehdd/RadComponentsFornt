@@ -6,17 +6,24 @@ import { useEffect, useRef, useState } from "react";
 import classes from "./AddDevice.module.css"
 
 export default function AddDevice() {
+
+    type comp_list = {
+        comp_id: number
+        comp_name: string
+    }
     const device_input = useRef<HTMLInputElement>(null);
     const amount_input = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch();
     const device = useAppSelector(addDeviceSlice.selectors.selectDevice)
     const components = useAppSelector(addDeviceSlice.selectors.selectComponents)
     const [loading, setLoading] = useState(false);
-    const [componentsList, setComponentsList] = useState<string[]>([]);
+    const [componentsList, setComponentsList] = useState<comp_list[]>([]);
     const [compName, setCompName] = useState("")
     const [compAmount, setCompAmount] = useState<number >(0)
 
     const storedAuthToken = localStorage.getItem('authToken');
+
+    console.log("components", components)
 
 
     async function fetchDevices() {
@@ -63,7 +70,7 @@ export default function AddDevice() {
         setCompAmount(Number(amount_input.current.value));
     };
 
-    const handleTable = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleTable = () => {
         // e.preventDefault();
         const deviceData = { device_name: device, comp_data: components };
 
@@ -95,6 +102,10 @@ export default function AddDevice() {
             // Обработка ошибок
         });
     };
+
+    const handleClick = (comp_name: string) => {
+        dispatch(addDeviceSlice.actions.removeComponent({comp_name: comp_name}));
+    }
     
     
     return (
@@ -108,7 +119,7 @@ export default function AddDevice() {
                             {/* <p className="text-[1.2rem] mb-[0.5rem]">Укажите название</p> */}
                             <input
                             type="text"
-                            className="control mb-3"
+                            className="control mb-3 shadow-lg"
                             ref={device_input}
                             placeholder="Название прибора"
                             />
@@ -128,7 +139,7 @@ export default function AddDevice() {
                     {loading ? <p>Loading...</p> :
                     <select
                     id="comp_name"
-                    className="control mb-3 mt-[2rem]"
+                    className="control mb-3 mt-[2rem] shadow-lg"
                     value={compName}
                     onChange={(event) => setCompName(event.target.value)}
                     >
@@ -143,7 +154,7 @@ export default function AddDevice() {
                     </select>}
                     <input
                     type="number"
-                    className="control mb-3"
+                    className="control mb-3 shadow-lg"
                     ref={amount_input}
                     placeholder="Выберите количество"
                     onChange={handleAmount}
@@ -156,12 +167,12 @@ export default function AddDevice() {
                 </form>
                 </div>}
             
-                <div className="w-[50%] ml-[2rem] mt-[3rem]">
+                <div className="w-[50%] mt-[52px] ml-[2rem]">
                     {device &&
                     <form onSubmit={handleTable}>
                         <h1 className="text-xl mb-1">Устройство: {device}</h1>
                         <section className={classes.tableContainer}>
-                            <table className="w-full">
+                            <table className="w-full shadow-lg">
                             <thead>
                                 <tr>
                                 <th className="">Название</th>
@@ -173,9 +184,11 @@ export default function AddDevice() {
                                 .map((component) => (
                                     <tr
                                     key={component.comp_name.toLowerCase()}
+                                    onClick={() => handleClick(component.comp_name)}
                                     >
                                     <td>{component.comp_name}</td>
-                                    <td>{component.amount_need}</td>
+                                    <td>{component.amount_need}
+                                    </td>
                                     </tr>
                                     ))}
                                 </tbody>

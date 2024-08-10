@@ -93,7 +93,7 @@ export default function AddOrder() {
             {loading ? <p>Loading...</p> :
             <select
             id="device_name"
-            className="control mb-3"
+            className="control mb-3 shadow-lg"
             value={deviceName}
             onChange={(event) => setDeviceName(event.target.value)}
             >
@@ -108,7 +108,7 @@ export default function AddOrder() {
             </select>}
             <input
             type="number"
-            className="control mb-3"
+            className="control mb-3 shadow-lg"
             ref={input}
             placeholder="Выберите количество"
             onChange={handleAmount}
@@ -121,7 +121,7 @@ export default function AddOrder() {
         </form>
         <Replace />
         </div>
-        <div className="w-1/2">
+        <div className="">
             <OrderData />
         </div>
     </div>

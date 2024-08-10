@@ -32,7 +32,11 @@ export const addDeviceSlice = createSlice({
 
         setComponent(state, action: PayloadAction<{component: Component}>) {
             state.components.push(action.payload.component)
+        },
+        removeComponent(state, action: PayloadAction<{comp_name: string}>) {
+            state.components = state.components.filter(component => component.comp_name !== action.payload.comp_name)
         }
+
         
 }
 })

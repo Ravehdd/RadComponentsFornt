@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import { addDeviceSlice } from "../../store/addDevice.slice";
+// import { addDeviceSlice } from "../../store/addDevice.slice";
 import { useAppdispatch, useAppSelector } from "../../store/store";
 import { useEffect, useRef, useState } from "react";
 import { addComponentSlice } from "../../store/addComponent.slice";
@@ -22,7 +22,7 @@ export default function AddComponent() {
     const components = useAppSelector(addComponentSlice.selectors.selectComponents)
     console.log(components)
 
-    const handleTable = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleTable = () => {
         // e.preventDefault()
         fetch("http://127.0.0.1:8000/api/v1/update/", {
         method: "POST",
@@ -107,21 +107,21 @@ export default function AddComponent() {
                 <form onSubmit={handleCompSubmit}>
                     <input
                     type="text"
-                    className="control mb-3"
+                    className="control mb-3 shadow-lg"
                     ref={comp_input}
                     placeholder="Название компонента"
                     onChange={handleComp}
                     />
                     <input
                         type="number"
-                        className="control mb-3"
+                        className="control mb-3 shadow-lg"
                         ref={amount_input}
                         placeholder="Выберите количество"
                         onChange={handleAmount}
                     />
                     <select
                         id="category"
-                        className="control"
+                        className="control shadow-lg"
                         value={category}
                         onChange={(event) => handleCategory(event)}
                     >
@@ -143,7 +143,7 @@ export default function AddComponent() {
                 <div className="w-[50%] ml-[2rem] mt-[4.25rem]">
                     <form onSubmit={handleTable}>
                         <section className={classes.tableContainer}>
-                            <table className="w-full">
+                            <table className="w-full shadow-lg`">
                             <thead>
                                 <tr>
                                 <th className="">Название</th>

@@ -4,13 +4,13 @@ import classes from "./OrderData.module.css"
 
 export default function OrderDataTable() {
     const orderdata = useAppSelector(orderDataSlice.selectors.selectOrderData)
-    console.log(orderdata)
+    console.log("order-data", orderdata)
 
     return (
         <div>
             {orderdata && 
             <section className={classes.tableContainer}>
-                <table className="w-full">
+                <table className="w-full shadow-lg">
                 <thead>
                     <tr>
                     <th className="px-[1.5rem]">Название</th>

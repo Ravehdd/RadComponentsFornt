@@ -2,7 +2,7 @@ import classes from "./Authorization.module.css"
 import { useDispatch } from "react-redux"
 import { authenticationSlice } from "../../store/authentication.slice"
 import { useAppSelector } from "../../store/store"
-import { useRef, useState } from "react"
+import { useRef} from "react"
 export default function Authorization() {
     const isAuthenticated = useAppSelector(authenticationSlice.selectors.selectIsAuthenticated)
     const dispatch = useDispatch()

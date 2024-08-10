@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { authenticationSlice } from "../../store/authentication.slice";
+// import { authenticationSlice } from "../../store/authentication.slice";
 
 export default function Header() {
     const storedIsAuthenticated = localStorage.getItem('isAuthenticated')

@@ -6,13 +6,10 @@ import AddOrderPage from './pages/AddOrderPage';
 import OrdersPage from './pages/OrdersPage';
 import AddDevicePage from './pages/AddDevicePage';
 import AddComponentPage from './pages/AddComponentPage';
-import { authenticationSlice } from './store/authentication.slice';
-import { useAppSelector } from './store/store';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import AuthorizationPage from './pages/AuthorizationPage';
 import { useNavigate } from 'react-router-dom';
 // import { authenticationSlice } from './store/authentication.slice';
-import { useDispatch } from 'react-redux';
 
 function App() {
   // const dispatch = useDispatch()

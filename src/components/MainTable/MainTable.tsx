@@ -78,7 +78,7 @@ export function MainTable() {
           <label className="" >Select category</label>
           <select
             id="category"
-            className="control"
+            className="control shadow-lg"
             value={category}
             onChange={(event) => handleChange(event)}
           >
@@ -94,7 +94,7 @@ export function MainTable() {
 
         <div className="flex w-full justify-center">
           <section className={classes.mainTableContainer}>
-          <table className="w-full">
+          <table className="w-full shadow-lg">
             <thead>
               <tr>
                 <th>Название</th>
