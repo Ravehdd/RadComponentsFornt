@@ -2,6 +2,7 @@ import { useRef } from "react"
 import Button from "../Button/Button"
 import { useAppSelector } from "../../store/store";
 import { updateComponentSlice } from "../../store/updateComponent.slice";
+import { apiBaseUrl } from "../../App";
 
 export default function UpdateComponent() {
 
@@ -13,7 +14,7 @@ export default function UpdateComponent() {
         // event.preventDefault()
         const comp_data = {comp_name: component, amount_add: Number(input.current?.value)}
         console.log(comp_data)
-        fetch("http://127.0.0.1:8000/api/v1/add-comp-amount/", {
+        fetch(apiBaseUrl + "add-comp-amount/", {
         method: "POST",
         headers: { "Content-Type": "application/json",
             "Authorization": `Token ${localStorage.getItem('authToken')}` 

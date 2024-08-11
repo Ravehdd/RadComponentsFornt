@@ -11,6 +11,9 @@ import AuthorizationPage from './pages/AuthorizationPage';
 import { useNavigate } from 'react-router-dom';
 // import { authenticationSlice } from './store/authentication.slice';
 
+export const apiBaseUrl = "http://localhost:8000/api/v1/";
+export const authUrl = "http://localhost:8000/auth/token/";
+
 function App() {
   // const dispatch = useDispatch()
   const storedAuthToken = localStorage.getItem('authToken');

@@ -7,6 +7,7 @@ import Modal from "../Modal/Modal";
 import { ModalContext } from "../../context/ModalContext";
 import UpdateComponent from "../UpdateComponent/UpdateComponent";
 import { updateComponentSlice } from "../../store/updateComponent.slice";
+import { apiBaseUrl } from "../../App";
 
 
 // const selectCounter = (state: AppState, counterId: CounterId) => state.counters[counterId]?.counter ?? 0
@@ -20,6 +21,7 @@ export function MainTable() {
     // const isAuthenticated = useAppSelector(authenticationSlice.selectors.selectIsAuthenticated)
     const storedAuthToken = localStorage.getItem('authToken');
     const storedIsAuthenticated = localStorage.getItem('isAuthenticated')
+    // console.log(stor)
 
     const handleChange = (event: any) => {
       setCategory(event.target.value)
@@ -28,7 +30,7 @@ export function MainTable() {
 
     useEffect(() => {
         const fetchComponents = async () => {
-            const response = await fetch("http://127.0.0.1:8000/api/v1/complist", {
+            const response = await fetch(apiBaseUrl +"complist/", {
                 headers: {
                     "Authorization": `Token ${storedAuthToken}`
                 }

@@ -4,6 +4,7 @@ import { useAppSelector } from "../../store/store"
 import Button from "../Button/Button";
 import { useEffect, useRef, useState } from "react";
 import classes from "./AddDevice.module.css"
+import { apiBaseUrl } from "../../App";
 
 export default function AddDevice() {
 
@@ -28,7 +29,7 @@ export default function AddDevice() {
 
     async function fetchDevices() {
         setLoading(true);
-        const response = await fetch("http://127.0.0.1:8000/api/v1/add-new-device/", 
+        const response = await fetch(apiBaseUrl + "add-new-device/", 
         {
             headers: {
                 "Authorization": `Token ${storedAuthToken}`
@@ -74,7 +75,7 @@ export default function AddDevice() {
         // e.preventDefault();
         const deviceData = { device_name: device, comp_data: components };
 
-        fetch("http://127.0.0.1:8000/api/v1/add-new-device/", {
+        fetch(apiBaseUrl + "add-new-device/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

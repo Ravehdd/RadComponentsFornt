@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from "react-router-dom";
 import { ModalState } from './context/ModalContext.tsx'
 
-
+// export const apiBaseUrl = "http://radcomponents.ru:8000/api/v1/";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -4,6 +4,7 @@ import { useAppdispatch, useAppSelector } from "../../store/store";
 import { useEffect, useRef, useState } from "react";
 import { addComponentSlice } from "../../store/addComponent.slice";
 import classes from "./AddComponent.module.css";
+import { apiBaseUrl } from "../../App";
 // import { componentsSlice } from "../../store/components.slice";
 
 export default function AddComponent() {
@@ -24,7 +25,7 @@ export default function AddComponent() {
 
     const handleTable = () => {
         // e.preventDefault()
-        fetch("http://127.0.0.1:8000/api/v1/update/", {
+        fetch(apiBaseUrl + "update/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -53,8 +54,11 @@ export default function AddComponent() {
         });
     };
 
+
+
+
     const fetchCategories = async () => {
-        const response = await fetch("http://127.0.0.1:8000/api/v1/update/", {
+        const response = await fetch(apiBaseUrl + "update/", {
                 headers: {
                     "Authorization": `Token ${storedAuthToken}`
                 }

@@ -5,6 +5,7 @@ import { useDispatch} from "react-redux";
 import Replace from "../Replace/Replace";
 import OrderData from "../OrderData/OrderData";
 import { orderDataSlice } from "../../store/orderdata.slice";
+import { apiBaseUrl } from "../../App";
 
 
 export default function AddOrder() {
@@ -20,7 +21,7 @@ export default function AddOrder() {
 
   async function fetchDevices() {
     setLoading(true);
-    const response = await fetch("http://127.0.0.1:8000/api/v1/add",
+    const response = await fetch(apiBaseUrl + "add/",
       {
       headers: { 
         "Authorization": `Token ${storedAuthToken}` },
@@ -40,7 +41,7 @@ export default function AddOrder() {
     e.preventDefault();
     const deviceData = { device_name: deviceName, device_need: amount };
 
-    fetch("http://127.0.0.1:8000/api/v1/add/", {
+    fetch(apiBaseUrl + "add/", {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",

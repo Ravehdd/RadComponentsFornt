@@ -3,6 +3,7 @@ import { replaceSlice } from "../../store/replace.slice";
 import { useAppSelector } from "../../store/store";
 import Button from "../Button/Button";
 import { orderDataSlice } from "../../store/orderdata.slice";
+import { apiBaseUrl } from "../../App";
 
 
 // let replaceList: any [] = [];
@@ -24,7 +25,7 @@ export default function Replace() {
         // console.log("replaceList", replaceList[0]);
         dispatch(replaceSlice.actions.setNotEnough({isNotEnough: false}));
 
-        fetch("http://127.0.0.1:8000/api/v1/replace/", {
+        fetch(apiBaseUrl + "replace/", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",

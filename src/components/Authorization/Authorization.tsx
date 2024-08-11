@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { authenticationSlice } from "../../store/authentication.slice"
 import { useAppSelector } from "../../store/store"
 import { useRef} from "react"
+import { authUrl } from "../../App"
 export default function Authorization() {
     const isAuthenticated = useAppSelector(authenticationSlice.selectors.selectIsAuthenticated)
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ export default function Authorization() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const loginData = { username: login.current?.value, password: pass.current?.value }
-        await fetch("http://127.0.0.1:8000/auth/token/login/", {
+        await fetch(authUrl + "login/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
@@ -31,6 +32,7 @@ export default function Authorization() {
                 console.log("Auth.jsx/handleSubmit", data.auth_token)
                 localStorage.setItem('authToken', data.auth_token);
                 localStorage.setItem('isAuthenticated', 'true');
+                console.log("auth_token", localStorage.getItem('authToken'))
                 dispatch(authenticationSlice.actions.setIsAuthenticated({isAuthenticated: true}));
                 window.location.href = "/"
                 // dispatch(authenticationSlice.actions.setAuthorizationToken({authorizationToken: data.auth_token}));

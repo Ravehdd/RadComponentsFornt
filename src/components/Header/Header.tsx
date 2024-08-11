@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { authUrl } from "../../App";
 // import { authenticationSlice } from "../../store/authentication.slice";
 
 export default function Header() {
@@ -6,7 +7,7 @@ export default function Header() {
 
 
     const handleClick = () => {
-      fetch("http://127.0.0.1:8000/auth/token/logout/", {
+      fetch(authUrl + "logout/", {
           method: "POST",
           headers: { "Content-Type": "application/json" , "Authorization": `Token ${localStorage.getItem('authToken')}`},
           // body: JSON.stringify(loginData),

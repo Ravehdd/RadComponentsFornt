@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { orderSlice } from "../../store/orders.slice";
 import { useAppSelector } from "../../store/store";
 import classes from "./Orders.module.css"
+import { apiBaseUrl } from "../../App";
 
 export default function Orders() {
     const [loading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ export default function Orders() {
 
     async function fetchOrders() {
     setLoading(true);
-    const response = await fetch("http://127.0.0.1:8000/api/v1/orders/", 
+    const response = await fetch(apiBaseUrl + "orders/", 
         {
             headers: {
                 "Authorization": `Token ${storedAuthToken}`
