@@ -41,6 +41,9 @@ export default function Header() {
             <Link className="no-underline mx-2 text-white" to="/addcomponent">
               Add component
             </Link>
+            <Link className="no-underline mx-2 text-white" to="/specs">
+              Devices specs 
+            </Link>
           </span>
           <button className="justyfy-end" onClick={() => handleClick()}>Выйти</button>
         </div>

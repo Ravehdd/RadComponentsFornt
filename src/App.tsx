@@ -9,6 +9,7 @@ import AddComponentPage from './pages/AddComponentPage';
 import { useEffect } from 'react';
 import AuthorizationPage from './pages/AuthorizationPage';
 import { useNavigate } from 'react-router-dom';
+import DevicesSpecsPage from './pages/DevicesSpecsPage';
 // import { authenticationSlice } from './store/authentication.slice';
 
 export const apiBaseUrl = "http://localhost:8000/api/v1/";
@@ -28,7 +29,7 @@ function App() {
 
   
   useEffect(() => {
-    if(storedIsAuthenticated === "false") {
+    if(storedIsAuthenticated === "false" || storedIsAuthenticated === null) {
       navigate('/auth')
     } else {
       navigate('/')
@@ -48,6 +49,8 @@ function App() {
           <Route path="/adddevice" element={<AddDevicePage />} />
           <Route path="/addcomponent" element={<AddComponentPage />} />
           <Route path="/auth" element={<AuthorizationPage />} />
+          <Route path="/specs" element={<DevicesSpecsPage />} />
+
         </Routes>
       </>
 

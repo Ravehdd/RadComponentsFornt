@@ -8,6 +8,7 @@ import { addDeviceSlice } from "./addDevice.slice";
 import { updateComponentSlice } from "./updateComponent.slice";
 import { addComponentSlice } from "./addComponent.slice";
 import { authenticationSlice } from "./authentication.slice";
+import { devicesSpecsSlice } from "./devicesSepcs.slice";
 
 export const store = configureStore({
     reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore({
         [addDeviceSlice.name]: addDeviceSlice.reducer,
         [updateComponentSlice.name]: updateComponentSlice.reducer,
         [addComponentSlice.name]: addComponentSlice.reducer,
-        [authenticationSlice.name]: authenticationSlice.reducer
+        [authenticationSlice.name]: authenticationSlice.reducer,
+        [devicesSpecsSlice.name]: devicesSpecsSlice.reducer
 
 
     }
