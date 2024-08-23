@@ -2,7 +2,7 @@
 
 interface ModalProps {
     children: React.ReactNode
-    text: string
+    text: any
     onClick: () => void
 }
 

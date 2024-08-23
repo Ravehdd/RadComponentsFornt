@@ -62,6 +62,7 @@ export default function AddOrder() {
           dispatch(replaceSlice.actions.setReplaceComponent({replaceComponent: data.comp_to_replace}));
           dispatch(replaceSlice.actions.setNotEnough({isNotEnough: true}));
         } else if (data.status === 200) {
+          console.log(data.order_data)
           dispatch(orderDataSlice.actions.addOrderData({orderdata: data.order_data}));
         }
         // Здесь вы можете обработать полученные данные

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Component, componentsSlice } from "../../store/components.slice";
+import { Component, componentsSlice, Consumables, consumablesSlice } from "../../store/components.slice";
 import { useAppSelector } from "../../store/store";
 import classes from "./MainTable.module.css"
 import Modal from "../Modal/Modal";
@@ -8,6 +8,7 @@ import { ModalContext } from "../../context/ModalContext";
 import UpdateComponent from "../UpdateComponent/UpdateComponent";
 import { updateComponentSlice } from "../../store/updateComponent.slice";
 import { apiBaseUrl } from "../../App";
+import { devicesSpecsSlice } from "../../store/devicesSepcs.slice";
 
 
 // const selectCounter = (state: AppState, counterId: CounterId) => state.counters[counterId]?.counter ?? 0
@@ -17,6 +18,8 @@ export function MainTable() {
     const [category, setCategory] = useState("all");
     const {modal, open: openModal, close: closeModal} = useContext(ModalContext)
     const component = useAppSelector(updateComponentSlice.selectors.selectComponent)
+    const selectedDevice = useAppSelector(devicesSpecsSlice.selectors.selectSelectedDevice) // selectedDevice
+    console.log("selectedDevice", selectedDevice)
     // const auth_token = useAppSelector(authenticationSlice.selectors.selectAuthorizationToken)
     // const isAuthenticated = useAppSelector(authenticationSlice.selectors.selectIsAuthenticated)
     const storedAuthToken = localStorage.getItem('authToken');
@@ -30,20 +33,35 @@ export function MainTable() {
 
     useEffect(() => {
         const fetchComponents = async () => {
-            const response = await fetch(apiBaseUrl +"complist/", {
+            const response_comp = await fetch(apiBaseUrl +"complist/", {
                 headers: {
                     "Authorization": `Token ${storedAuthToken}`
                 }
             });
-            const components: Component[] = await response.json();
+            const response_cons = await fetch(apiBaseUrl +"consumlist/", {
+                headers: {
+                    "Authorization": `Token ${storedAuthToken}`
+                }
+            });
+            
+            const components: Component[] = await response_comp.json();
+           
+            // const consumables: Consumables[] =[];
+            
+            // const consumables: Consumables[] = await response_cons.json();
+            // const consumables: Consumables[] = resp["consumables"];
+            console.log("components", components)
+            // dispatch(consumablesSlice.actions.stored({ consumables }));
             dispatch(componentsSlice.actions.stored({ components }));
+            
         };
 
         fetchComponents();
     }, [dispatch]);
 
     const selectComponents = useAppSelector(componentsSlice.selectors.selectAllComponents)
-    // console.log("selectComponents", selectComponents)
+    const selectConsumables = useAppSelector(consumablesSlice.selectors.selectAllConsumables)
+    console.log("selectComponents", selectComponents)
 
     const uniqueCats = Array.from(
     new Set(Object.values(selectComponents).map((component) => component.category_name)));
@@ -74,7 +92,7 @@ export function MainTable() {
       {storedIsAuthenticated === "false" ? null : 
       <>
       <h1 className="text-3xl mt-[2rem] ml-[2rem]">Список компонентов</h1>
-      <div className="flex width-full justify-center">
+      <div className="flex width-full ml-[2rem]">
         <div className="width-[60%] min-w-[60%] flex items-center mt-[1rem]">
         {/* <Filter /> */}
           <label className="" >Select category</label>
@@ -94,7 +112,7 @@ export function MainTable() {
         </div>
       </div>
 
-        <div className="flex w-full justify-center">
+        <div className="flex w-60% max-w-60% ml-[2rem]">
           <section className={classes.mainTableContainer}>
           <table className="w-full shadow-lg">
             <thead>
@@ -111,7 +129,7 @@ export function MainTable() {
                 //     .toLowerCase()
                 //     .includes(component.category_name.toLowerCase())
                 // )
-                .map((component: Component) => (
+                .map((component: Component) => (component.category_name != "Расходники" &&
                   <tr
                     key={component.comp_id}
                     className={component.amount < 20 ? classes.red : component.amount < 50 ? classes.yellow : ""}
@@ -125,7 +143,39 @@ export function MainTable() {
             </tbody>
           </table>
         </section>
+
+        <section className={classes.consTableContainer}>
+          <table className="w-full shadow-lg">
+            <thead>
+              <tr>
+                <th>Название</th>
+                {/* <th>Колличество на складе</th>
+                <th>Категория</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {Object.values(selectComponents)
+                // .filter((component) =>
+                //   category
+                //     .toLowerCase()
+                //     .includes(component.category_name.toLowerCase())
+                // )
+                .map((consume: Component) => (consume.category_name === "Расходники" &&
+                  <tr
+                    key={consume.comp_id}
+                    // className={consume.amount < 20 ? classes.red : consume.amount < 50 ? classes.yellow : ""}
+                    // onClick={() => handleClick(consume.comp_name)}
+                  >
+                    <td>{consume.comp_name}</td>
+                    {/* <td>{consume.amount}</td>
+                    <td>{consume.category_name}</td> */}
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </section>
         </div>
+
         {modal &&
           <Modal text={"Добавить компонент " + component} onClick={closeModal}>
               <UpdateComponent />

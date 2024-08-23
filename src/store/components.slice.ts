@@ -7,6 +7,12 @@ export type Component = {
     category_name: string
 }
 
+export type Consumables = {
+    comp_id: number
+    comp_name: string
+}
+
+export type ConsumablesId = number;
 export type ComponentId = number;
 
 export type ComponentsSate = {
@@ -15,11 +21,24 @@ export type ComponentsSate = {
     selectedCategory: string | undefined
 }
 
+export type ConsumablesState = {
+    entities: Record<ConsumablesId, Consumables>,
+}
+
 const initialComponentsState: ComponentsSate = {
     entities: {},
     ids: [],
     selectedCategory: undefined
 }
+
+const initialConsumablesState: ConsumablesState = {
+    entities: {}
+}
+
+// const initialState = {
+//     components: initialComponentsState,
+//     consumables: initialConsumablesState
+// }
 
 
 export const componentsSlice = createSlice({
@@ -36,7 +55,7 @@ export const componentsSlice = createSlice({
     },
     reducers: {
         stored: (state, action: PayloadAction<{components: Component[]}>) => {
-            const {components} = action.payload
+            const {components} = action.payload 
             return {
                 ...state,
                 entities: components.reduce((acc, component) => {
@@ -52,3 +71,22 @@ export const componentsSlice = createSlice({
     }
 })
 
+export const consumablesSlice = createSlice({
+    name: "consumables",
+    initialState: initialConsumablesState,
+    selectors: {
+        selectAllConsumables: state => state.entities
+    },
+    reducers: {
+        stored: (state, action: PayloadAction<{consumables: Consumables[]}>) => {
+            const {consumables} = action.payload
+            return {
+                ...state,
+                entities: consumables.reduce((acc, consumable) => {
+                    acc[consumable.comp_id] = consumable
+                    return acc
+                }, {} as Record<ConsumablesId, Consumables>),
+            }
+        }
+    }
+})
