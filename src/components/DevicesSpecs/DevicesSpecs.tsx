@@ -7,7 +7,6 @@ import classes from "./DeviceSpecs.module.css"
 import { ModalContext } from '../../context/ModalContext';
 import Modal from '../Modal/Modal';
 import { componentsSlice } from '../../store/components.slice';
-import Button from '../Button/Button';
 
 const storedAuthToken = localStorage.getItem("authToken");
 
@@ -36,7 +35,7 @@ const DevicesSpecs = () => {
         }
     );
     const deviceList = await response.json();
-    console.log(updateDevice);
+    // console.log(updateDevice);
     dispatch(devicesSpecsSlice.actions.storeDevicesSpecs({ specsList: deviceList }));
     setLoading(false);
     }
@@ -64,7 +63,6 @@ const DevicesSpecs = () => {
         if (foundDevice) {
             dispatch(devicesSpecsSlice.actions.selectDevice({device: foundDevice}));
         }
-        // console.log(foundDevice)
     }
 
     const handleDelete = (comp_id: number) => {
@@ -105,7 +103,6 @@ const DevicesSpecs = () => {
       })
       .then((data) => {
         if (data.status === 400) {
-          console.log(data.response);
         } else if (data.status === 200) {
 
         }
@@ -119,9 +116,9 @@ const DevicesSpecs = () => {
 
     }
 
-    const handleNothing = () => {
-        console.log("Nope")
-    }
+    // const handleNothing = () => {
+    //     console.log("Nope")
+    // }
 
 
     const handleAmount = (comp_id: number, comp_name: string, amount_need: number) => {
@@ -197,7 +194,7 @@ const DevicesSpecs = () => {
                                 <p className='min-w-[50%] font-bold'>{comp.comp_name}</p>
                                 {/* <input type="text" id={comp.comp_id.toString()} defaultValue={comp.comp_name} className='control shadow-lg'/> */}
                                 <input type="number" id={comp.comp_id.toString()} defaultValue={comp.amount_need} className='control ml-2 shadow-lg ' onChange={(e) => handleAmount( comp.comp_id, comp.comp_name, +e.target.value)}/>
-                                <img src="/Cross.svg" alt="cross.svg" className='max-h-[42px] max-w-[42px] ml-2 shadow-lg' onClick={() => handleDelete(comp.comp_id)}/>
+                                <img src="/Cross.svg" id={comp.comp_id.toString()} alt="cross.svg" className='max-h-[42px] max-w-[42px] ml-2 shadow-lg' onClick={() => handleDelete(comp.comp_id)}/>
                                 
                             </div>
                     ))

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Component, componentsSlice, Consumables, consumablesSlice } from "../../store/components.slice";
+import { Component, componentsSlice} from "../../store/components.slice";
 import { useAppSelector } from "../../store/store";
 import classes from "./MainTable.module.css"
 import Modal from "../Modal/Modal";
@@ -8,7 +8,7 @@ import { ModalContext } from "../../context/ModalContext";
 import UpdateComponent from "../UpdateComponent/UpdateComponent";
 import { updateComponentSlice } from "../../store/updateComponent.slice";
 import { apiBaseUrl } from "../../App";
-import { devicesSpecsSlice } from "../../store/devicesSepcs.slice";
+// import { devicesSpecsSlice } from "../../store/devicesSepcs.slice";
 
 
 // const selectCounter = (state: AppState, counterId: CounterId) => state.counters[counterId]?.counter ?? 0
@@ -18,8 +18,7 @@ export function MainTable() {
     const [category, setCategory] = useState("all");
     const {modal, open: openModal, close: closeModal} = useContext(ModalContext)
     const component = useAppSelector(updateComponentSlice.selectors.selectComponent)
-    const selectedDevice = useAppSelector(devicesSpecsSlice.selectors.selectSelectedDevice) // selectedDevice
-    console.log("selectedDevice", selectedDevice)
+    // const selectedDevice = useAppSelector(devicesSpecsSlice.selectors.selectSelectedDevice) // selectedDevice
     // const auth_token = useAppSelector(authenticationSlice.selectors.selectAuthorizationToken)
     // const isAuthenticated = useAppSelector(authenticationSlice.selectors.selectIsAuthenticated)
     const storedAuthToken = localStorage.getItem('authToken');
@@ -38,11 +37,11 @@ export function MainTable() {
                     "Authorization": `Token ${storedAuthToken}`
                 }
             });
-            const response_cons = await fetch(apiBaseUrl +"consumlist/", {
-                headers: {
-                    "Authorization": `Token ${storedAuthToken}`
-                }
-            });
+            // const response_cons = await fetch(apiBaseUrl +"consumlist/", {
+            //     headers: {
+            //         "Authorization": `Token ${storedAuthToken}`
+            //     }
+            // });
             
             const components: Component[] = await response_comp.json();
            
@@ -60,7 +59,7 @@ export function MainTable() {
     }, [dispatch]);
 
     const selectComponents = useAppSelector(componentsSlice.selectors.selectAllComponents)
-    const selectConsumables = useAppSelector(consumablesSlice.selectors.selectAllConsumables)
+    // const selectConsumables = useAppSelector(consumablesSlice.selectors.selectAllConsumables)
     console.log("selectComponents", selectComponents)
 
     const uniqueCats = Array.from(
@@ -132,7 +131,7 @@ export function MainTable() {
                 .map((component: Component) => (component.category_name != "Расходники" &&
                   <tr
                     key={component.comp_id}
-                    className={component.amount < 20 ? classes.red : component.amount < 50 ? classes.yellow : ""}
+                    className={component.amount < 30 ? classes.red : component.amount < 60 ? classes.yellow : ""}
                     onClick={() => handleClick(component.comp_name)}
                   >
                     <td>{component.comp_name}</td>
